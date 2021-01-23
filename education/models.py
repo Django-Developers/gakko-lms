@@ -25,14 +25,17 @@ class CourseSession(models.Model):
         ('thur', 'Thursday'),
         ('fri', 'Friday'),
     )
-
+    
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     day_of_week = models.CharField(
         _("Day of the week"), max_length=4, choices=WEEK_DAYS)
-    time = models.TimeField(_("Class Time"))
+    time_start = models.TimeField(_("Class Startes"))
+    time_finish = models.TimeField(_("Class Finishes"))
 
 
-# To-do upload to needs rework (function instead of directory)
+# To-do upload to needs rework (function instead of directory) 
+# /ashkan/django <-  File 
+# /ashkan/django/asnwers <- Answers
 class HomeWork(models.Model):
     title = models.CharField(max_length=100)
     send_time = models.DateTimeField(auto_now_add=True)
@@ -43,17 +46,15 @@ class HomeWork(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.RESTRICT)
     weight = models.PositiveIntegerField(default=1)
 
-
 def get_upload_path(instance, filename):
     pass
     # return os.path.join(f"{instance.}", filename)
-
 
 class HomeWorkAnswer(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     home_work = models.ForeignKey(HomeWork, on_delete=models.CASCADE)
     answer_file = models.FileField(
-        upload_to=get_upload_path, null=True, blank=True)
+        upload_to='Hanswer', null=True, blank=True)
     answer_text = models.TextField(_("Explain The answer"))
     delivery_time = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(
@@ -84,7 +85,7 @@ class QuestionAnswer(models.Model):
     question = models.ForeignKey(QuizQuestion, on_delete=models.CASCADE)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     answer = models.FileField(
-        upload_to=get_upload_path, null=True, blank=True)
+        upload_to='Qanswers', null=True, blank=True)
     student_score = models.FloatField(null=True, blank=True, max_length=20)
 
 
