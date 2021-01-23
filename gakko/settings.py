@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'user',
     'education',
     'grades',
+    'django_extensions',
+    
     
 ]
 AUTH_USER_MODEL = 'user.User'
