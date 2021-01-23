@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,UserManager
 
-from education.models import CourseSession
+# from education.models import CourseSession
 
 class Student(UserManager):
     def get_queryset(self):
@@ -29,24 +29,30 @@ class User(AbstractUser):
     )
     user_type=models.CharField(max_length=155,choices=user_choices)
 
-    active= models.BooleanField(default=True) #can login
+    # active= models.BooleanField(default=True) #can login
     #staff=models.BooleanField(default=False) #staff user non superuser
     #admin=models.BooleanField(default=False) #superuser
 
-    USERNAME_FIELD = 'email'
+    # USERNAME_FIELD = 'email'
     #USERNAME_FIELD and password are required by default
-    object = 
-    REQUIRED_FIELDS=[] #python manage.py createsuperuser
+    objects =  UserManager()
+    students = Student()
+    teachers = Teacher()
+    uni = University_staff() 
+    # REQUIRED_FIELDS=['email'] #python manage.py createsuperuser
 
     def __str__(self):
         return self.university_id
 #for absent/present
 
-class AP(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    course=models.ForeignKey(CourseSession,on_delete=models.CASCADE)
-
 
 
 class profile(models.Model):
     user= models.OneToOneField(User,on_delete=models.CASCADE)
+
+
+
+class AP(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    course=models.ForeignKey('education.CourseSession',on_delete=models.CASCADE)
+

@@ -25,7 +25,6 @@ SECRET_KEY = ')=c=dpr!o^n9y@_h1%+$e+l9#wq(0ty+*rrw&$3nz*&by&pi7d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-AUTH_USER_MODEL = 'user.User'
 ALLOWED_HOSTS = []
 
 
@@ -41,7 +40,9 @@ INSTALLED_APPS = [
     'user',
     'education',
     'grades',
+    
 ]
+AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
