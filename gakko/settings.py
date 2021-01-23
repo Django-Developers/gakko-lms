@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'user',
     'education',
     'grades',
-    'django_extensions',
+    # 'django_extensions',
     
     
 ]
