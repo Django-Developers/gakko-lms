@@ -52,6 +52,9 @@ class User(AbstractUser):
 class profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return User.university_id
+
 
 # for absent/present
 class AP(models.Model):
