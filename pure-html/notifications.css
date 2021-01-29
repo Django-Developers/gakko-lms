@@ -40,10 +40,10 @@ small {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   content: url('bell.png');
-  height: 3px;
-  left: 0;
+  /* height: 3px; */
+  left: 1%;
   transition: 0.8s ease;
-  width: 45px;
+  /* width: 45px; */
 }
 .navicon:before {
   box-shadow: #fff 0 14px 0 0;
@@ -52,7 +52,7 @@ small {
 }
 .navicon:after {
   position: absolute;
-  top: 28px;
+  /* top: 28px; */
 }
 .navicon--active {
   margin-top: 20px;
