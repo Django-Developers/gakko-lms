@@ -33,6 +33,7 @@ small {
   display: block;
   z-index: 99;
   transition: linear 0.5s all;
+
 }
 .navicon:before, .navicon:after {
   background: #fff;
@@ -68,19 +69,22 @@ small {
 }
 
 .toggle {
+  width: auto;
     position: fixed;
     top: 0%;
     right: 3%;
   display: block;
-  margin: 20px auto;
-  width: 30%;
+  border:1px #dfdddc;
+  border-radius: 12px;
+  /* margin: 20px auto; */
+  /* width: 30%; */
   background-color: rgba(255, 255, 255, 0.8);
   padding: 15px;
   display: block;
   opacity: 0;
   transition: ease-in 0.5s all;
   transform: translateY(-200%);
-  min-width: 320px;
+  /* min-width: 320px; */
   z-index: 1001;
 }
 .toggle--active {
@@ -90,12 +94,12 @@ small {
   transform: translateY(0);
 }
 .toggle__menu {
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 .toggle__menu li {
-  width: 25%;
+  /* width: 25%; */
   display: block;
-  margin: 10px auto;
+  /* margin: 10px auto; */
 }
 .toggle__menu li a {
   text-decoration: none;
@@ -141,4 +145,7 @@ small {
 .social li a:hover {
   color: #db5523;
   transition: linear 0.5s all;
+}
+li::marker{
+  display: none;
 }
