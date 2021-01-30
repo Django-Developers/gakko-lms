@@ -6,17 +6,17 @@ from django.contrib.auth.models import AbstractUser, UserManager
 
 class Student(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(user_type='student')
+        return super().get_queryset().filter(user_type='S')
 
 
 class Teacher(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(user_type='teacher')
+        return super().get_queryset().filter(user_type='T')
 
 
 class University_staff(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(user_type='university_staff')
+        return super().get_queryset().filter(user_type='U')
 
 
 class User(AbstractUser):
@@ -25,13 +25,13 @@ class User(AbstractUser):
     # email=models.EmailField(max_length=255,unique=True)
     # full_name=models.CharField(max_length=150,unique=True)
     # first_name=models.CharField(max_length=150,unique=True)
-    university_id = models.CharField(max_length=255, primary_key=True)
+    university_id = models.AutoField(auto_created=True, primary_key=True)
     user_choices = (
         ('S', 'student'),
         ('T', 'teacher'),
         ('U', 'university_staff'),
     )
-    user_type = models.CharField(max_length=1, choices=user_choices)
+    user_type = models.CharField(max_length=1, choices=user_choices,default='S')
 
     # active= models.BooleanField(default=True) #can login
     # staff=models.BooleanField(default=False) #staff user non superuser
@@ -39,14 +39,17 @@ class User(AbstractUser):
 
     # USERNAME_FIELD = 'email'
     # USERNAME_FIELD and password are required by default
-    objects = UserManager()
     students = Student()
     teachers = Teacher()
     uni = University_staff()
+    objects = UserManager()
     # REQUIRED_FIELDS=['email'] #python manage.py createsuperuser
 
+    # def save(self):
+    #     self.
+
     def __str__(self):
-        return self.university_id
+        return f'{self.university_id} {self.username}'
 
 
 class profile(models.Model):

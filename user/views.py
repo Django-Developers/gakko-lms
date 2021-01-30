@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authentication, login
+from django.contrib.auth import authenticate, login,get_user_model
 from .forms import ExtendedUserCreationForm
+
+User = get_user_model()
 
 def index(request):
     if request.user.is_authenticated:
@@ -14,23 +16,29 @@ def index(request):
 @login_required
 def profile(request):
     return render(request, 'example/profile.html')
+
 def register(request):
     if request.method=="POST":
         form=ExtendedUserCreationForm(request.POST)
 
         if form.is_valid():
-            form.save()
-
+            user_obj = form.save()
+            print(user_obj)
+            print(type(user_obj))
+            # new_user = User.objects.create(username='')
             username=form.cleaned_data.get('username')
             password=form.cleaned_data.get('password1')
-            user= authentication(username=username, password=password)
-            login(request, user)
-
+            print(username)
+            print(password)
+            user= authenticate(username=username, password=password)
+            print(user)
+            login(request, user_obj)
             return redirect('index')
     else:
-        from = ExtendedUserCreationForm()       
+        form = ExtendedUserCreationForm()   
+            
 
 
     
     context={'form':form}
-    return render(request,'user/register.html')
+    return render(request,'user/register.html',context)
