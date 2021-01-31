@@ -1,0 +1,66 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 text-center">
+                <div class="card card-tasks {{ direction.reverse_panel }}">
+                    <div class="card-header {{ direction.panel }}">
+                        <h6 class="title d-inline">{% trans 'Recent actions' %}</h6>
+                        <p class="card-category d-inline">{% trans 'My actions' %}</p>
+                        {% load log %}
+                        {% get_admin_log 10 as admin_log for_user user %}
+                    </div>
+                    <div class="card-body">
+                        {% if admin_log %}
+                            <div class="table-full-width table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    {% for entry in admin_log %}
+                                        <tr>
+                                            <td class="text-center">
+                                                {% if entry.is_addition %}
+                                                    <span class="fa fa-plus-circle text-success"></span>
+                                                {% endif %}
+                                                {% if entry.is_change %}
+                                                    <span class="fa fa-edit text-warning"></span>
+                                                {% endif %}
+                                                {% if entry.is_deletion %}
+                                                    <span class="fa fa-trash text-danger"></span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="{{ direction.panel }}">
+                                                <p class="title">{{ entry.object_repr }}</p>
+                                                {% if entry.content_type %}
+                                                    <p class="text-muted">
+                                                        {% filter capfirst %}{{ entry.content_type }}{% endfilter %}</p>
+                                                {% else %}
+                                                    <p class="text-muted">{% trans 'Unknown content' %}</p>
+                                                {% endif %}
+                                            </td>
+                                            <td class="td-actions">
+                                                <a href="{{ entry.get_admin_url }}" type="button" rel="tooltip" title=""
+                                                   class="btn btn-link"
+                                                   data-original-title="{{ entry.object_repr }}">
+                                                    <i class="tim-icons icon-settings"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p>{% trans 'None available' %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrascript %}{% endblock %}

@@ -18,23 +18,27 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTH_USER_MODEL = 'user.User'
+
 INSTALLED_APPS = [
+
+'admin_black.apps.AdminBlackConfig',
+    # 'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user',
     'education',
     'grades',
+    'user',
     'nested_inline',
     'django_tables2',
     # 'django_extensions',
     
     
 ]
-AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
