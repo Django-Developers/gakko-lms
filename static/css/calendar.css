@@ -15,11 +15,14 @@
 .jzdcal {
   padding:0 10px 10px 10px; 
   box-sizing:border-box!important; 
-  background:#749d9e; 
-  background: -webkit-linear-gradient(#749d9e, #b3a68b)!important; 
-  background: -o-linear-gradient(#749d9e, #b3a68b)!important; 
-  background: -moz-linear-gradient(#749d9e, #b3a68b)!important; 
-  background: linear-gradient(#749d9e, #b3a68b)!important;
+  background:#d62956; 
+  background: -webkit-linear-gradient(#d62956, #b3a68b)!important; 
+  background: -o-linear-gradient(#d62956, #b3a68b)!important; 
+  background: -moz-linear-gradient(#d62956, #b3a68b)!important; 
+  background: linear-gradient(#d62956, #b3a68b)!important;
+  box-shadow: 0px 35px 50px rgb(0 0 0 / 20%);
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .jzdcalt {

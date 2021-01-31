@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+  <link rel="stylesheet" href="{% static 'css/course-detail.css' %}">
+
+
+<div class="skills">
+          <hr class="hr-text" data-content="{{object.title}}">
+        </div>
+
+
+<section id="wrapper">
+   <div class="content">
+      <!-- Tab links -->
+      <div class="tabs">
+         <button class="tablinks active" data-country="Bulletin"><p data-title="Bulletin">Bulletin</p></button>
+         <button class="tablinks" data-country="Resources"><p data-title="Resources">Resources</p></button>
+         <button class="tablinks" data-country="Sessions"><p data-title="Sessions">Sessions</p></button>
+         <button class="tablinks" data-country="Evaluation"><p data-title="Evaluation">Evaluation</p></button>
+      </div>
+
+      <!-- Tab content -->
+      <div class="wrapper_tabcontent">
+         <div id="Bulletin" class="tabcontent active">
+            <h3>Bulletin</h3>
+            <ul>
+            {% for bulletin in bulletinboard %}
+               <li>
+               <strong>{{bulletin.title}}</strong>
+               <br>
+                  <p>{{bulletin.description}}</p>by :{{bulletin.publisher.username}}  
+               <br>
+               </li>
+            {% endfor %}
+            <ul>
+         </div>
+
+         <div id="Resources" class="tabcontent">
+            <h3>Resources</h3>
+            <ul>
+            {% for cr in courseresources %}
+               <li>
+               <strong>{{cr.title}}</strong>
+               <br>
+               Download -> <a href='{{ request.META.HTTP_HOST }}{{cr.file_url}}'>File</a>
+               </li>
+            {% endfor %}
+            </ul>
+            </div>
+
+         <div id="Sessions" class="tabcontent">
+            <h3>Sessions</h3>
+            <ul>
+               {% for cs in coursesession %}
+               <li>
+               <strong>{{cs.date}}</strong>
+               <ul>
+               <li>
+                  {{cs.day_of_week}}   
+               </li>
+               <li>
+                  Started on :{{cs.time_start}}   
+               </li>
+               <li>
+                  Finished on :{{cs.time_finish}}   
+               </li>
+               </ul>
+               </li>
+            {% endfor %}
+            </ul>
+         </div>
+
+         <div id="Evaluation" class="tabcontent">
+            <h3>Evaluation</h3>
+
+            <p>will impelement <br>-Home Work <br>-Quiz <br>--Soon :)</p>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+<script>
+
+
+var tabLinks = document.querySelectorAll(".tablinks");
+var tabContent = document.querySelectorAll(".tabcontent");
+
+
+tabLinks.forEach(function(el) {
+   el.addEventListener("click", openTabs);
+});
+
+
+function openTabs(el) {
+   var btnTarget = el.currentTarget;
+   var country = btnTarget.dataset.country;
+
+   tabContent.forEach(function(el) {
+      el.classList.remove("active");
+   });
+
+   tabLinks.forEach(function(el) {
+      el.classList.remove("active");
+   });
+
+   document.querySelector("#" + country).classList.add("active");
+   
+   btnTarget.classList.add("active");
+}
+</script>
+
+
+
+{% endblock content %}

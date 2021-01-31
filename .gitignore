@@ -132,6 +132,8 @@ dmypy.json
 staticfiles/
 .staticfiles
 
+debug.log
+
 # vscode
 .vscode
 .history

@@ -2,6 +2,8 @@ asgiref==3.3.1
 autopep8==1.5.4
 Django==3.1.5
 django-extensions==3.1.0
+django-nested-inline==0.4.2
+django-tables2==2.3.4
 pycodestyle==2.6.0
 pydot==1.4.1
 pygraphviz==1.6

@@ -1,12 +1,10 @@
-.todo-list {
-    background: #FFF;
-    font-size: 20px;
-    max-width: 15em;
+.todo-list {    
+    background: #262a2b;
+    max-width: 35em;
     margin: auto;
     padding: 0.5em 1em;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 35px 50px rgb(0 0 0 / 20%);
     height: 300px;
-    /* overflow-x: scroll; */
     overflow: auto;
   }
   .todo {
@@ -27,8 +25,9 @@
     opacity: 0;
   }
   .todo__text {
-    color: #135156;
+    color: #5EBEC1;
     transition: all 0.4s linear 0.4s;
+    font-size: 1.5vh;
   }
   .todo__icon {
     position: absolute;
@@ -106,6 +105,7 @@
   .todo__state:checked ~ .todo__text {
     transition-delay: 0s;
     color: #5EBEC1;
+    color: #135156;
     opacity: 0.6;
   }
   .todo__state:checked ~ .todo__icon .todo__box {

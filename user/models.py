@@ -25,7 +25,7 @@ class User(AbstractUser):
     # email=models.EmailField(max_length=255,unique=True)
     # full_name=models.CharField(max_length=150,unique=True)
     # first_name=models.CharField(max_length=150,unique=True)
-    university_id = models.CharField(max_length=255, primary_key=True)
+    university_id = models.CharField(max_length=255,auto_created=True, primary_key=True)
     user_choices = (
         ('S', 'student'),
         ('T', 'teacher'),
@@ -51,7 +51,7 @@ class User(AbstractUser):
 
 class profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return User.university_id
 

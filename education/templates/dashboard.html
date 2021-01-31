@@ -1,0 +1,258 @@
+{% extends 'base-dashboard.html' %}
+
+{% block classes %}
+
+    <div>
+        <div class="skills">
+            <hr class="hr-text" data-content="Classes">
+        </div>
+        <ul class="tilesWrap">
+
+            {% for class in classes %}
+
+            <li>
+                <h2>{{class.course.id}}</h2>
+                <h3>{{class.course.title}}</h3>
+                {% comment %} <h5>{{faculty}}</h5> {% endcomment %}
+                <p>
+                    {{class.course.detail}}
+                </p>
+                <button onclick="location.href='{% url 'course-detail' class.course.id %}'">Go to Course >></button>
+            </li>
+
+            {% endfor %}
+
+        </ul>
+    </div>
+{% endblock classes %}
+
+{% block homeworks %}
+    <!-- Home Works -->
+    <div>
+
+        <div class="skills">
+            <hr class="hr-text" data-content="Homeworks">
+        </div>
+
+        <svg viewBox="0 0 0 0" style="position: absolute; z-index: -1; opacity: 0;">
+            <defs>
+                <linearGradient id="boxGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="25" y2="25">
+                    <stop offset="0%" stop-color="#27FDC7" />
+                    <stop offset="100%" stop-color="#0FC0F5" />
+                </linearGradient>
+
+                <linearGradient id="lineGradient">
+                    <stop offset="0%" stop-color="#0FC0F5" />
+                    <stop offset="100%" stop-color="#27FDC7" />
+                </linearGradient>
+
+                <path id="todo__line" stroke="url(#lineGradient)" d="M21 12.3h168v0.1z"></path>
+                <path id="todo__box" stroke="url(#boxGradient)"
+                    d="M21 12.7v5c0 1.3-1 2.3-2.3 2.3H8.3C7 20 6 19 6 17.7V7.3C6 6 7 5 8.3 5h10.4C20 5 21 6 21 7.3v5.4">
+                </path>
+                <path id="todo__check" stroke="url(#boxGradient)" d="M10 13l2 2 5-5"></path>
+                <circle id="todo__circle" cx="13.5" cy="12.5" r="10"></circle>
+            </defs>
+        </svg>
+
+
+
+        <style>
+            .in-lines {
+                display: inline;
+                display: inline-block;
+                width: 20%;
+                min-width: 200px;
+                max-width: 230px;
+                padding: 5px 20px 40px;
+                position: relative;
+                vertical-align: top;
+                margin: 10px;
+                min-height: 25vh;
+            }
+
+            .skills {
+                margin: 10px auto;
+            }
+        </style>
+
+        <ul style="text-align: center;">
+            {% for course in courses %}
+
+
+            <li class="in-lines">
+                <div class="skills">
+                    <hr class="hr-text" style="font-size: 15px;" data-content="{{course.title}}">
+                </div>
+                <div class="todo-list">
+
+                    {% for homework in course.homework %}
+
+                    <label class="todo">
+                        <input class="todo__state" type="checkbox" />
+
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 200 25" class="todo__icon">
+                            <use xlink:href="#todo__line" class="todo__line"></use>
+                            <use xlink:href="#todo__box" class="todo__box"></use>
+                            <use xlink:href="#todo__check" class="todo__check"></use>
+                            <use xlink:href="#todo__circle" class="todo__circle"></use>
+                        </svg>
+
+
+                        <div class="todo__text">{{homework.title}}</div>
+
+                    </label>
+
+                    {% endfor %}
+
+                </div>
+
+            </li>
+
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock homeworks %}
+
+
+{% block timesheet %}
+    <!-- time sheet -->
+    <div>
+    <div class="skills">
+        <hr class="hr-text" data-content="Time Table">
+    </div>
+    <br>
+    <br>
+    <div class="table-wrapper">
+        <table class="fl-table">
+        <thead>
+            <tr>
+            <th>dars 1</th>
+            <th>dars 2</th>
+            <th>dars 3</th>
+            </tr>
+        </thead>
+        <tbody style="color: white;">
+            {% comment %} <tr>
+            <td>شنبه 4-6 </td>
+            <td>دوشنبه 10-12</td>
+            <td>سه شنبه 8-10 </td>
+            </tr>
+            <tr>
+            <td>Content 2</td>
+            <td>Content 2</td>
+            <td>Content 2</td>
+            </tr>
+            <tr>
+            <td>Content 3</td>
+            <td>Content 3</td>
+            <td>Content 3</td>
+            </tr>
+            <tr>
+            <td>Content 4</td>
+            <td>Content 4</td>
+            <td>Content 4</td>
+            </tr>
+            <tr>
+            <td>Content 4</td>
+            <td>Content 4</td>
+            <td>Content 4</td>
+            </tr> {% endcomment %}
+
+        <tbody>
+        </table>
+    </div>
+    </div>
+
+{% endblock timesheet %}
+
+{% block calendar %}
+      <!-- Calendar -->
+      <div>
+        <div class="skills">
+          <hr class="hr-text" data-content="Calendar">
+        </div>
+        <div class="jzdbox1 jzdbasf jzdcal">
+          <div class="jzdcalt">June 2017</div>
+
+          <span>Su</span>
+          <span>Mo</span>
+          <span>Tu</span>
+          <span>We</span>
+          <span>Th</span>
+          <span>Fr</span>
+          <span>Sa</span>
+
+
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span>1</span>
+          <span class="circle" data-title="Algebra Exam">2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>6</span>
+          <span>7</span>
+          <span>8</span>
+          <span>9</span>
+          <span>10</span>
+          <span>11</span>
+          <span class="circle" data-title="Data Sience Exam">12</span>
+          <span>13</span>
+          <span>14</span>
+          <span>15</span>
+          <span>16</span>
+          <span>17</span>
+          <span>18</span>
+          <span>19</span>
+          <span>20</span>
+          <span>21</span>
+          <span class="circle" data-title="End of semester">22</span>
+          <span>23</span>
+          <span>24</span>
+          <span>25</span>
+          <span>26</span>
+          <span>27</span>
+          <span>28</span>
+          <span>29</span>
+          <span>30</span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+        </div>
+      </div>
+
+{% endblock calendar %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+  <link rel="stylesheet" href="{% static 'css/course-list.css' %}">
+
+
+
+<div style='margin:auto;'>
+<div class="skills">
+          <hr class="hr-text" data-content="Courses">
+        </div>
+
+<ul style="
+    margin: auto;
+">
+
+
+{% for course in object_list %}
+  <li class="portfolio-experiment" >
+  <a href="{% url 'course-detail' course.id %}">
+    <span class="text">{{course.title}}<br>->{{course.faculty}}</span>
+    <span class="line -right"></span>
+    <span class="line -top"></span>
+    <span class="line -left"></span>
+    <span class="line -bottom"></span>
+  </a>
+  </li>
+{% endfor %}
+
+  </ul>
+</div>
+
+{% endblock content %}

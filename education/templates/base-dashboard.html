@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+  <link rel="stylesheet" href="{% static 'css/class-list.css' %}">
+  <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/homeworks.css' %}">
+  <link rel="stylesheet" href="{% static 'css/time-table.css' %}">
+<!--
+  <link rel="stylesheet" href="class-list.css">
+  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="homeworks.css">
+  <link rel="stylesheet" href="time-table.css">
+-->
+
+{% block calendar %}{% endblock calendar %}
+{% block classes %}{% endblock classes %}
+{% block homeworks %}{% endblock homeworks %}
+<br>
+{% block timesheet %}{% endblock timesheet %}
+
+{% endblock content %}

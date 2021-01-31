@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authentication, login
+from django.contrib.auth import authenticate, login
 from .forms import ExtendedUserCreationForm
 
 def index(request):
@@ -23,12 +23,12 @@ def register(request):
 
             username=form.cleaned_data.get('username')
             password=form.cleaned_data.get('password1')
-            user= authentication(username=username, password=password)
+            user= authenticate(username=username, password=password)
             login(request, user)
 
             return redirect('index')
     else:
-        from = ExtendedUserCreationForm()       
+        form = ExtendedUserCreationForm()       
 
 
     
