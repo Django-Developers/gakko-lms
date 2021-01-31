@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+  <link rel="stylesheet" href="{% static 'css/course-detail.css' %}">
+
+
+<div class="skills">
+          <hr class="hr-text" data-content="Notification From {{object.publisher.username}} ">
+        </div>
+
+
+<section id="wrapper">
+   <div class="content">
+      <!-- Tab links -->
+      <div class="tabs">
+         <button class="tablinks active" data-country="{{object.title}}"><p data-title="{{object.title}}">{{object.title}}</p></button>
+      </div>
+
+      <!-- Tab content -->
+      <div class="wrapper_tabcontent">
+         <div id="{{title}}" class="tabcontent active">
+            <h3>{{object.title}}</h3>
+            
+                  <p>{{object.description}}</p>
+                  
+               <br>
+         </div>
+
+      </div>
+   </div>
+</section>
+
+
+
+{% endblock content %}

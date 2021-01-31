@@ -89,7 +89,7 @@ class HomeWork(models.Model):
     weight = models.PositiveIntegerField(default=1)
 
     class Meta:
-        ordering = ['send_time', 'deadline', 'title']
+        ordering = ['-send_time', 'deadline', 'title']
 
     def __str__(self):
         return f'{self.title} - {self.deadline - datetime.date.today()}'
@@ -128,7 +128,7 @@ class Quiz(HomeWork):
     end_time = models.DateTimeField()
 
     class Meta:
-        ordering = ['start_time', 'end_time', 'title']
+        ordering = ['-start_time', 'end_time', 'title']
 
     def __str__(self):
         return f' {self.title} - {self.start_time} - {self.end_time}'
@@ -163,6 +163,9 @@ class BulletinBoard(models.Model):
     publisher = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, null=True, blank=True)
+
+    class Meta:
+        ordering = ['-id']
 
     def __str__(self):
         return f'{self.title} , by {self.publisher.username}'

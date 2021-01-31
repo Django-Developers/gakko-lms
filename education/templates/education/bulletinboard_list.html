@@ -5,22 +5,12 @@
 
 
   <link rel="stylesheet" href="{% static 'css/course-list.css' %}">
-<!--
 
-
-<style>
-
-  li::before {
-    content: counters(index, ".", decimal-leading-zero);
-  }
-</style>
-
--->
 
 
 <div style='margin:auto;'>
 <div class="skills">
-          <hr class="hr-text" data-content="Courses">
+          <hr class="hr-text" data-content="Notifications">
         </div>
 
 <ul style="
@@ -28,10 +18,10 @@
 ">
 
 
-{% for course in object_list %}
+{% for bullet in object_list %}
   <li class="portfolio-experiment" >
-  <a href="{% url 'course-detail' course.id %}">
-    <span class="text">{{course.title}}<br>->{{course.faculty}}</span>
+  <a href="{% url 'bulletin-detail' bullet.id %}">
+    <span class="text">{{bullet.title}}</span>
     <span class="line -right"></span>
     <span class="line -top"></span>
     <span class="line -left"></span>

@@ -67,3 +67,9 @@ class CourseDetailView(DetailView):
     
 class CourseListView(ListView):
     model = Course
+
+class BulletinBoardListView(ListView):
+    model = BulletinBoard
+    # template_name = ".html"
+class BulletinBoardDetailView(DetailView):
+    model = BulletinBoard

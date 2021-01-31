@@ -17,7 +17,7 @@ ul {
   
   /* Element counter */
   li::before {
-    content: counters(index, ".", decimal-leading-zero);
+    /* content: counters(index, ".", decimal-leading-zero); */
     font-size: 1.5rem;
     text-align: right;
     font-weight: bold;
@@ -65,6 +65,7 @@ ul {
     font-size: 1.5em;
     cursor: pointer;
     letter-spacing: 0.07em;
+    text-decoration: none;
   }
   .portfolio-experiment a .text {
     font-family: proxima-nova, monospace;

@@ -30,7 +30,7 @@
 <body>
   <h1 style="font-family: 'lato';font-size:3.5em;color: #d62956;text-align: center;">
 
-    <strong ><a href='#' style='cursor:pointer;'>GAKKO</a></strong>
+    <strong ><a href='#' style='    color: #d62956;     text-underline-offset: 16.5px;'>GAKKO</a></strong>
     <br>
     {% if request.user.is_authenticated %}
     Hey {{request.user.username}} !
@@ -68,7 +68,7 @@
       <a href="http://{{ request.META.HTTP_HOST }}/edu/courses/">Courses</a>
       <a href="#">Professors</a>
       <a href="http://{{ request.META.HTTP_HOST }}/edu/dash/">Dashboard</a>
-      <a href="#">Notifications</a>
+      <a href="http://{{ request.META.HTTP_HOST }}/edu/bulletins/">Notifications</a>
 
     </nav>
   </div>
