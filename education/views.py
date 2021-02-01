@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render,get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, TemplateView, DetailView
 from django.core.files.storage import FileSystemStorage
@@ -50,9 +50,7 @@ class HomeWorkMixIn():
                     homeworks.append({'homework': hw,
                                       'answer': hw.homeworkanswer_set.filter(student_id=self.request.user)
                                       })
-
                 context["homeworks"] = homeworks
-
             else:
                 context["homeworks"] = HomeWork.objects.none()
         return context
@@ -60,23 +58,22 @@ class HomeWorkMixIn():
     def post(self, request, *args, **kwargs):
 
         # form = HomeWorkAnswerForm(data=request.POST, files=request.FILES)
-        home_work_obj = get_object_or_404(HomeWork,id = request.POST['home_work'])
-        answer_obj =  HomeWorkAnswer.objects.get(student = request.user,
-                                   home_work = home_work_obj)
+        home_work_obj = get_object_or_404(
+            HomeWork, id=request.POST['home_work'])
+        answer_obj = HomeWorkAnswer.objects.get(student=request.user,
+                                                home_work=home_work_obj)
         if not answer_obj:
             HomeWorkAnswer(student=request.user,
-                       home_work=home_work_obj,
-                       answer_file=FileSystemStorage().save(
-                           f"{HomeWorkAnswer.answer_file.field.upload_to}/{request.FILES['answer_file'].name}", request.FILES['answer_file']),
-                       answer_text = request.POST['answer_text'],
-                       ).save()
+                           home_work=home_work_obj,
+                           answer_file=FileSystemStorage().save(
+                               f"{HomeWorkAnswer.answer_file.field.upload_to}/{request.FILES['answer_file'].name}", request.FILES['answer_file']),
+                           answer_text=request.POST['answer_text'],
+                           ).save()
         else:
             answer_obj.answer_file = FileSystemStorage().save(
-                           f"{HomeWorkAnswer.answer_file.field.upload_to}/{request.FILES['answer_file'].name}", request.FILES['answer_file'])
+                f"{HomeWorkAnswer.answer_file.field.upload_to}/{request.FILES['answer_file'].name}", request.FILES['answer_file'])
             answer_obj.answer_text = request.POST['answer_text']
             answer_obj.save()
-            
-        
 
         if hasattr(super(), 'post'):
             return super().post(request, args, kwargs)

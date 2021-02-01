@@ -46,7 +46,7 @@
                <li>
                <strong>{{cr.title}}</strong>
                <br>
-               Download -> <a href='{{ request.META.HTTP_HOST }}{{cr.file_url}}'>File</a>
+               Download -> <a href='{{ MEDIA_ROOT }}{{cr.file_url.url}}'>File</a>
                </li>
             {% endfor %}
             </ul>
@@ -92,7 +92,7 @@
                <li>
                   Date :{{hwa.modified}} <br>
                   Detail :{{hwa.answer_text}}<br>
-                  Uploadted <a href="{{hwa.answer_file}}">File</a>
+                  Uploadted <a href="{{ MEDIA_ROOT }}{{hwa.answer_file.url}}">File</a>
                </li>
                {% endfor %}
                <li>
