@@ -18,6 +18,18 @@ class University_staff(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(user_type='university_staff')
 
+class NewUserManager(UserManager):
+    def create_user(self,email,password,**extra_fields):
+        if not email:
+            raise ValueError("user must have email address")
+        user =self.model(
+            email=self.normalize_email,
+            password=password
+        )
+    user.set_password(password)
+    user.save(using=self._db)
+    return user
+
 
 class User(AbstractUser):
 
@@ -25,6 +37,7 @@ class User(AbstractUser):
     # email=models.EmailField(max_length=255,unique=True)
     # full_name=models.CharField(max_length=150,unique=True)
     # first_name=models.CharField(max_length=150,unique=True)
+    last_login=models.DateTimeField(verbose_name='last login', auto_now=True)
     university_id = models.CharField(max_length=255, primary_key=True)
     user_choices = (
         ('S', 'student'),
@@ -37,13 +50,18 @@ class User(AbstractUser):
     # staff=models.BooleanField(default=False) #staff user non superuser
     # admin=models.BooleanField(default=False) #superuser
 
-    # USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'email'
     # USERNAME_FIELD and password are required by default
     objects = UserManager()
     students = Student()
     teachers = Teacher()
     uni = University_staff()
     # REQUIRED_FIELDS=['email'] #python manage.py createsuperuser
+    #def has_perm(self,perm,obj=None):
+        #return self.is_admin
+
+    #def has_module_perms(self,app_label):
+        #return self.is_admin
 
     def __str__(self):
         return self.university_id

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    {% if request.user.is_authenticated %}
+        <p>{{request.user.username}} | <a href="{%url 'logout'%}">Logout</a></p>
+    {%else%}
+        <p><a href="{% url 'register' %}">Register</a> | <a href ="#">login</a></p>
+    {%endif%}
+</head>
+<body>
+    
+</body>
+<footer>
+
+</footer>
+</html>

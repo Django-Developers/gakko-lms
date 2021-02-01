@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'user',
     'education',
     'grades',
+    'emailer',
     # 'django_extensions',
     
     
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'gakko.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR+'/TEMPLATES/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +129,4 @@ STATIC_URL = '/static/'
 
 #LOGIN_REDIRECT_URL = '/'
 lOGIN_URL = '/login/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 

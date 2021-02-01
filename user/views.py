@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authentication, login
+from django.contrib.auth import authentication, login, logout
 from .forms import ExtendedUserCreationForm
 
 def index(request):
@@ -15,6 +15,7 @@ def index(request):
 def profile(request):
     return render(request, 'example/profile.html')
 def register(request):
+    context={}
     if request.method=="POST":
         form=ExtendedUserCreationForm(request.POST)
 
@@ -26,11 +27,19 @@ def register(request):
             user= authentication(username=username, password=password)
             login(request, user)
 
-            return redirect('index')
-    else:
-        from = ExtendedUserCreationForm()       
+            return redirect('index')# or home?
+    else:#GET request
+        from = ExtendedUserCreationForm()  
+        context['ExtendedUserCreationForm'] = form   
 
 
     
     context={'form':form}
     return render(request,'user/register.html')
+"""
+def logout_view(request):
+    logout(request)
+    return redirect ('home')
+
+
+"""
