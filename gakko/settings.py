@@ -21,9 +21,10 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'user.User'
 
 INSTALLED_APPS = [
-
-'admin_black.apps.AdminBlackConfig',
-    # 'app',
+    
+    'jet.dashboard',
+    'jet',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'user',
     'nested_inline',
     'django_tables2',
+    'statici18n',
     # 'django_extensions',
     
     
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -132,7 +135,7 @@ LOGGING = {
     }
 }
 
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS =  BASE_DIR / 'static',
