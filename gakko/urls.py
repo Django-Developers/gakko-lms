@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from emailer import views
 from django.contrib.auth import views as auth_views
-from user.views import logout_view
+from user.views import logout_view,login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +32,6 @@ urlpatterns = [
     ),
     
     name='change-password'),
-    path('lougou/',logout_view,name="logout")
+    path('logout/',logout_view,name="logout"),
+    path('login/',login_view,name="login")
 ]
