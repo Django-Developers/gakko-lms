@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from gjango.views.generic import TemplateView
+from django.views.generic import TemplateView
 from emailer import views
 from django.contrib.auth import views as auth_views
 from user.views import logout_view
@@ -26,7 +26,7 @@ urlpatterns = [
     path('',include('user.urls')),
     path('', TemplateView.as_view(template_name="home.html"), name='home'),
     path('send-form-email/',views.SendFormEmail.as_view(),name='send_email'),
-    path('change-password/',auth_views.PasswordchangeViews.as_view(
+    path('change-password/',auth_views.PasswordChangeView.as_view(
         template_name='emailer/change-password',
         success_url='/'
     ),
