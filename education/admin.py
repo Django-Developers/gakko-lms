@@ -1,63 +1,63 @@
 import builtins
 from django.contrib import admin
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+from nested_inline.admin import NestedTabularInline, NestedModelAdmin
 
 from .models import (Quiz, QuizQuestion, QuestionAnswer, HomeWork,
                      HomeWorkAnswer, BulletinBoard, Course, CourseSession, RegisterdCourses, CourseResources)
 
 
-class QuizQuestionAnswersInline(NestedStackedInline):
+class QuizQuestionAnswersInline(NestedTabularInline):
     model = QuestionAnswer
     extra = 1
     fk_name = 'question'
 
 
-class QuizQuestionInline(NestedStackedInline):
+class QuizQuestionInline(NestedTabularInline):
     model = QuizQuestion
     extra = 1
     fk_name = 'quiz'
     inlines = [QuizQuestionAnswersInline]
 
 
-class QuizInline(NestedStackedInline):
+class QuizInline(NestedTabularInline):
     model = Quiz
     extra = 1
     fk_name = 'course'
     inlines = [QuizQuestionInline]
 
 
-class HomeWorkAwnsersInline(NestedStackedInline):
+class HomeWorkAwnsersInline(NestedTabularInline):
     model = HomeWorkAnswer
     extra = 1
     fk_name = 'home_work'
 
 
-class HomeWorkInline(NestedStackedInline):
+class HomeWorkInline(NestedTabularInline):
     model = HomeWork
     extra = 1
     fk_name = 'course'
     inlines = [HomeWorkAwnsersInline]
 
 
-class CourseSessionInline(NestedStackedInline):
+class CourseSessionInline(NestedTabularInline):
     model = CourseSession
     extra = 1
     fk_name = 'course'
 
 
-class StudentsInline(NestedStackedInline):
+class StudentsInline(NestedTabularInline):
     model = RegisterdCourses
     extra = 1
     fk_name = 'course'
 
 
-class ResourcesInline(NestedStackedInline):
+class ResourcesInline(NestedTabularInline):
     model = CourseResources
     extra = 1
     fk_name = 'course'
 
 
-class BulletinBoardInline(NestedStackedInline):
+class BulletinBoardInline(NestedTabularInline):
     model = BulletinBoard
     extra = 1
     fk_name = 'course'

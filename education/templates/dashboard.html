@@ -77,16 +77,16 @@
         </style>
 
         <ul style="text-align: center;">
-            {% for course in courses %}
+            {% for course in homeworks %}
 
 
             <li class="in-lines">
                 <div class="skills">
-                    <hr class="hr-text" style="font-size: 15px;" data-content="{{course.title}}">
+                    <hr class="hr-text" style="font-size: 15px;" data-content="{{course.course_title}}">
                 </div>
                 <div class="todo-list">
 
-                    {% for homework in course.homework %}
+                    {% for homework in course.homeworks %}
 
                     <label class="todo">
                         <input class="todo__state" type="checkbox" />
@@ -175,7 +175,7 @@
           <hr class="hr-text" data-content="Calendar">
         </div>
         <div class="jzdbox1 jzdbasf jzdcal">
-          <div class="jzdcalt">June 2017</div>
+          <div class="jzdcalt">Feb 2021</div>
 
           <span>Su</span>
           <span>Mo</span>
@@ -205,7 +205,7 @@
             <!--BLANK-->
           </span>
           <span>1</span>
-          <span class="circle" data-title="Algebra Exam">2</span>
+          <span class="circle" data-title="Enghelab Eslami Exam">2</span>
           <span>3</span>
           <span>4</span>
           <span>5</span>
@@ -225,15 +225,19 @@
           <span>19</span>
           <span>20</span>
           <span>21</span>
-          <span class="circle" data-title="End of semester">22</span>
+          <span class="circle" data-title="First One - Data Sience">22</span>
           <span>23</span>
           <span>24</span>
           <span>25</span>
           <span>26</span>
           <span>27</span>
           <span>28</span>
-          <span>29</span>
-          <span>30</span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
+          <span class="jzdb">
+            <!--BLANK-->
+          </span>
           <span class="jzdb">
             <!--BLANK-->
           </span>

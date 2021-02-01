@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.db.models import constraints
+from django.db.models.fields import related
 from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext as _
 # from django.contrib.auth import get_user_model
@@ -88,11 +89,22 @@ class HomeWork(models.Model):
     teacher = models.ForeignKey(User, on_delete=models.RESTRICT)
     weight = models.PositiveIntegerField(default=1)
 
+    @property
+    def remaining_days(self):
+        return self.deadline.replace(tzinfo=None) - datetime.datetime.now()
+    
+    @property 
+    def passed_sending_time(self):
+        if self.remaining_days.total_seconds() < 0:
+            return True
+        else:
+            return False
+            
     class Meta:
         ordering = ['-send_time', 'deadline', 'title']
 
     def __str__(self):
-        return f'{self.title} - {self.deadline - datetime.date.today()}'
+        return f'{self.title} - {self.deadline.replace(tzinfo=None) - datetime.datetime.now()}'
 
 
 def get_upload_path(instance, filename):

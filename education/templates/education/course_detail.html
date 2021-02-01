@@ -76,8 +76,43 @@
 
          <div id="Evaluation" class="tabcontent">
             <h3>Evaluation</h3>
+            <ul>
+               {% for hw in homeworks %}
+               <li>
+               {% if hw.homework.passed_sending_time %}
+               <div style="text-decoration: line-through;">
+               <strong>{{hw.homework.title}}</strong> -{{hw.homework.deadline}} ({{hw.homework.remaining_days}}) 
+               </div>
+               {% else %}
+               <strong>{{hw.homework.title}}</strong> -{{hw.homework.deadline}} ({{hw.homework.remaining_days}}) time-left
+               {% endif %}
+               <ul>
+               {% for hwa in hw.answer %}
+               
+               <li>
+                  Date :{{hwa.modified}} <br>
+                  Detail :{{hwa.answer_text}}<br>
+                  Uploadted <a href="{{hwa.answer_file}}">File</a>
+               </li>
+               {% endfor %}
+               <li>
+                  
+               <form method='POST' accept-charset="utf-8" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input name='answer_text' type="text" required>
+                  <input required name='home_work' id="id_home_work" value="{{hw.homework.id}}" hidden>
+                  <input name="student" required id="id_student" value='{{request.user}}' hidden>
+                  <input type="file" name="answer_file" required = 'required' accept="*" id="id_answer_file" >
+                  
 
-            <p>will impelement <br>-Home Work <br>-Quiz <br>--Soon :)</p>
+                <button type="submit" >send</button>
+               </form>
+               </li>
+               </ul>
+               </li>
+            {% endfor %}
+            </ul>
+            {% comment %} <p>will impelement <br>-Home Work <br>-Quiz <br>--Soon :)</p> {% endcomment %}
          </div>
       </div>
    </div>
