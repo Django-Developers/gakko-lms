@@ -25,10 +25,11 @@ class Course(models.Model):
     def __str__(self):
         return f'{self.title} - {self.faculty}'
 
+
 class CourseResources(models.Model):
     title = models.CharField(max_length=50)
     file_url = models.FileField(upload_to='courseResources')
-    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("CourseResources")
@@ -36,7 +37,6 @@ class CourseResources(models.Model):
 
     def __str__(self):
         return self.title
-
 
 
 '''
@@ -92,14 +92,14 @@ class HomeWork(models.Model):
     @property
     def remaining_days(self):
         return self.deadline.replace(tzinfo=None) - datetime.datetime.now()
-    
-    @property 
+
+    @property
     def passed_sending_time(self):
         if self.remaining_days.total_seconds() < 0:
             return True
         else:
             return False
-            
+
     class Meta:
         ordering = ['-send_time', 'deadline', 'title']
 
@@ -181,3 +181,4 @@ class BulletinBoard(models.Model):
 
     def __str__(self):
         return f'{self.title} , by {self.publisher.username}'
+

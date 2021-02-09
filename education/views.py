@@ -14,8 +14,10 @@ class ClassesMixIn():
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         self.classes = RegisterdCourses.objects.select_related(
             'course').filter(user=self.request.user)
+        
         context["classes"] = self.classes
         return context
 
@@ -45,12 +47,13 @@ class HomeWorkMixIn():
             if isinstance(self.object, Course):
                 homeworks = list(HomeWork.objects.filter(
                     course=self.object))
+                tmp_homeworks = []
                 for hw in homeworks:
-                    homeworks.remove(hw)
-                    homeworks.append({'homework': hw,
+
+                    tmp_homeworks.append({'homework': hw,
                                       'answer': hw.homeworkanswer_set.filter(student_id=self.request.user)
                                       })
-                context["homeworks"] = homeworks
+                context["homeworks"] = tmp_homeworks
             else:
                 context["homeworks"] = HomeWork.objects.none()
         return context
@@ -60,8 +63,11 @@ class HomeWorkMixIn():
         # form = HomeWorkAnswerForm(data=request.POST, files=request.FILES)
         home_work_obj = get_object_or_404(
             HomeWork, id=request.POST['home_work'])
-        answer_obj = HomeWorkAnswer.objects.get(student=request.user,
+        try:
+            answer_obj = HomeWorkAnswer.objects.get(student=request.user,
                                                 home_work=home_work_obj)
+        except:
+            answer_obj = None
         if not answer_obj:
             HomeWorkAnswer(student=request.user,
                            home_work=home_work_obj,
@@ -102,6 +108,7 @@ class CourseDetailView(HomeWorkMixIn, DetailView):
 
         context["courseresources"] = CourseResources.objects.filter(
             course=self.object)
+        
         context["coursesession"] = CourseSession.objects.filter(
             course=self.object)
         context["bulletinboard"] = BulletinBoard.objects.filter(
