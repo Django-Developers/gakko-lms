@@ -18,35 +18,65 @@ class University_staff(UserManager):
     def get_queryset(self):
         return super().get_queryset().filter(user_type='university_staff')
 
+class NewUserManager(UserManager):
+    def create_user(self,email,password,**extra_fields):
+        if not email:
+            raise ValueError("user must have email address")
+        user =self.model(
+            email=self.normalize_email,
+            password=password
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
 
 class User(AbstractUser):
+  
+    # @property
+    # def is_teacher(self):
+    #     if self.user_type=='T':
+    #         return True
+    #     else:
+    #         return False
+ 
+    
 
     # username=models.CharField(max_length=150,unique=True)
     # email=models.EmailField(max_length=255,unique=True)
     # full_name=models.CharField(max_length=150,unique=True)
     # first_name=models.CharField(max_length=150,unique=True)
-    university_id = models.CharField(max_length=255,auto_created=True, primary_key=True)
+    last_login=models.DateTimeField(verbose_name='last login', auto_now=True)
+    #university_id = models.CharField(max_length=255, primary_key=True, auto_created=True)
+    university_id = models.AutoField(primary_key=True,auto_created=True)
+    course=models.ManyToManyField("education.Course")
+
     user_choices = (
-        ('S', 'student'),
-        ('T', 'teacher'),
-        ('U', 'university_staff'),
+        ( 'student', 'S'),
+        ('teacher' ,'T'),
+        ( 'university_staff','U'),
     )
-    user_type = models.CharField(max_length=1, choices=user_choices)
+    user_type = models.CharField(max_length=30, choices=user_choices)
 
     # active= models.BooleanField(default=True) #can login
     # staff=models.BooleanField(default=False) #staff user non superuser
     # admin=models.BooleanField(default=False) #superuser
 
-    # USERNAME_FIELD = 'email'
+    #USERNAME_FIELD = 'email'
     # USERNAME_FIELD and password are required by default
     objects = UserManager()
     students = Student()
     teachers = Teacher()
     uni = University_staff()
     # REQUIRED_FIELDS=['email'] #python manage.py createsuperuser
+    #def has_perm(self,perm,obj=None):
+        #return self.is_admin
+
+    #def has_module_perms(self,app_label):
+        #return self.is_admin
 
     def __str__(self):
-        return self.university_id
+        return str(self.university_id)
 
 
 class profile(models.Model):

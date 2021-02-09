@@ -33,10 +33,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'education',
     'grades',
+<<<<<<< HEAD
     'user',
     'nested_inline',
     'django_tables2',
     'statici18n',
+=======
+    'emailer',
+>>>>>>> Niloufar
     # 'django_extensions',
     
     
@@ -57,7 +61,11 @@ ROOT_URLCONF = 'gakko.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [BASE_DIR / 'templates'],
+=======
+        'DIRS': [BASE_DIR /'templates'],
+>>>>>>> Niloufar
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,3 +155,4 @@ MEDIA_URL = '/media/'
 
 #LOGIN_REDIRECT_URL = '/'
 lOGIN_URL = '/login/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
