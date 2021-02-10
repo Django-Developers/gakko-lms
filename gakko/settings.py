@@ -13,7 +13,7 @@ SECRET_KEY = ')=c=dpr!o^n9y@_h1%+$e+l9#wq(0ty+*rrw&$3nz*&by&pi7d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -33,20 +33,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'education',
     'grades',
-<<<<<<< HEAD
-    'user',
+    'user.apps.UserConfig',
     'nested_inline',
     'django_tables2',
     'statici18n',
-=======
     'emailer',
->>>>>>> Niloufar
     # 'django_extensions',
     
     
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware'
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,11 +60,7 @@ ROOT_URLCONF = 'gakko.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< HEAD
         'DIRS': [BASE_DIR / 'templates'],
-=======
-        'DIRS': [BASE_DIR /'templates'],
->>>>>>> Niloufar
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,3 +151,18 @@ MEDIA_URL = '/media/'
 #LOGIN_REDIRECT_URL = '/'
 lOGIN_URL = '/login/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+
+# Extra lookup directories for collectstatic to find static files
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
+
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE= 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import  dj_database_url
+prod_db = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)

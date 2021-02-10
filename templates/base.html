@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/search.css' %}">
   <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
-
+<script type="text/javascript" src='{% static 'js/jquery.js' %}'></script>
 
 <!--
   <link rel="stylesheet" href="class-list.css">
@@ -33,7 +33,13 @@
     <strong ><a href='#' style='    color: #d62956;     text-underline-offset: 16.5px;'>GAKKO</a></strong>
     <br>
     {% if request.user.is_authenticated %}
-    Hey {{request.user.username}} !
+    Hey  
+    {% if request.user.first_name %}
+      {{request.user.first_name}} 
+      {% else %}
+      {{request.user.username}}
+    {% endif %}
+    !
     {% else %}
     Wellcome Stranger :-)
     {% endif %}
@@ -74,11 +80,26 @@
   </div>
 
   <div>
-    <a href="http://{{ request.META.HTTP_HOST }}/admin/"><img src="{% static 'img/profile.png' %}" alt="profile" style="position: fixed;
+
+    {% if request.user.is_authenticated %}
+    <a href="{% if request.user.is_staff %}{% url 'admin:index' %}{% else %}{% url 'profile' %}{% endif %}"><img src="{% static 'img/profile.png' %}" alt="profile" style="position: fixed;
     top: 10px;
     right: 25px;
     width: 45px;
     height: 45px;"></a>
+      <a href='{% url 'logout' %}'><img src="{% static 'img/logout.png' %}" alt="profile" style="position: fixed;
+    top: 65px;
+    right: 25px;
+    width: 45px;
+    height: 45px;"></a>
+    {% else %}
+        <a href="{% url 'login' %}"><img src="{% static 'img/profile.png' %}" alt="profile" style="position: fixed;
+    top: 10px;
+    right: 25px;
+    width: 45px;
+    height: 45px;"></a>
+    {% endif %}
+
   </div>
 
   <main>

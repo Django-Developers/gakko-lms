@@ -6,17 +6,17 @@ from django.contrib.auth.models import AbstractUser, UserManager
 
 class Student(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(user_type='student')
+        return super().get_queryset().filter(user_type='S')
 
 
 class Teacher(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(user_type='teacher')
+        return super().get_queryset().filter(user_type='T')
 
 
 class University_staff(UserManager):
     def get_queryset(self):
-        return super().get_queryset().filter(user_type='university_staff')
+        return super().get_queryset().filter(user_type='U')
 
 class NewUserManager(UserManager):
     def create_user(self,email,password,**extra_fields):
@@ -46,17 +46,17 @@ class User(AbstractUser):
     # email=models.EmailField(max_length=255,unique=True)
     # full_name=models.CharField(max_length=150,unique=True)
     # first_name=models.CharField(max_length=150,unique=True)
-    last_login=models.DateTimeField(verbose_name='last login', auto_now=True)
+    # last_login=models.DateTimeField(verbose_name='last login', auto_now=True)
     #university_id = models.CharField(max_length=255, primary_key=True, auto_created=True)
     university_id = models.AutoField(primary_key=True,auto_created=True)
-    course=models.ManyToManyField("education.Course")
+    course=models.ManyToManyField("education.Course",blank=True)
 
     user_choices = (
-        ( 'student', 'S'),
-        ('teacher' ,'T'),
-        ( 'university_staff','U'),
+        ('S','student'),
+        ('T','teacher' ),
+        ('U', 'university_staff'),
     )
-    user_type = models.CharField(max_length=30, choices=user_choices)
+    user_type = models.CharField(max_length=2, choices=user_choices,default='S')
 
     # active= models.BooleanField(default=True) #can login
     # staff=models.BooleanField(default=False) #staff user non superuser
@@ -74,6 +74,11 @@ class User(AbstractUser):
 
     #def has_module_perms(self,app_label):
         #return self.is_admin
+        
+    # def save(self,*args, **kwargs):
+    #     if not self.user_type :
+    #         self.user_type = 'S'
+    #     return super().save(args,kwargs)
 
     def __str__(self):
         return str(self.university_id)
